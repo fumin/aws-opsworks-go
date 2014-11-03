@@ -66,6 +66,7 @@ node[:deploy].each do |application, deploy|
     # Change to the package directory so that templates can be found through
     # relative paths in golang source code.
     cwd package_dir
+    environment deploy[:environment_variables]
     package_name = File.basename(package_path)
     binary = "#{node[:go][:gopath]}/bin/#{package_name}"
     opts = ["-host=#{node[:opsworks][:instance][:private_ip]}",
